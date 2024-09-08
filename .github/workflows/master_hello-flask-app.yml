@@ -40,6 +40,11 @@ jobs:
     needs: build
     environment:
       name: 'Production'
+    url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    permissions:
+      id-token: write
+      contents: read
+  
     steps:
       - name: Login to Azure
         uses: azure/login@v2
@@ -50,8 +55,10 @@ jobs:
 
       - name: Deploy Docker container to Azure Web App
         uses: azure/webapps-deploy@v3
+        id: deploy-to-webapp
         with:
           app-name: 'hello-flask-app'
+          slot-name: 'Production'
           images: ${{ secrets.ACR_LOGIN_SERVER }}/hello-flask-app:latest
     # steps:
     #   - uses: actions/checkout@v4
