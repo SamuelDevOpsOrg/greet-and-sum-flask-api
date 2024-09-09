@@ -41,4 +41,6 @@ EXPOSE 5000 2222
 
 # Run the application using a production-ready server
 # CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
+
+# Dev
 ENTRYPOINT ["/entrypoint.sh"]
