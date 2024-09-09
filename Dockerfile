@@ -14,10 +14,18 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    gcc \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get install -y build-essential gcc dialog openssh-server && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set the root password for SSH
+RUN echo "root:Docker!" | chpasswd
+
+COPY sshd_config /etc/ssh/
+
+# Copy entrypoint.sh into the container and make it executable
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 # Install the dependencies
 RUN pip install --upgrade pip
@@ -29,11 +37,8 @@ COPY . .
 # Run tests to verify the app works correctly
 RUN pytest --disable-warnings
 
-# Expose port 5000 for the Flask app
-EXPOSE 5000
-
-# # Run the Flask app using python3 -m flask
-# CMD ["flask", "run", "--host=0.0.0.0"]
+EXPOSE 5000 2222
 
 # Run the application using a production-ready server
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
+# CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
+ENTRYPOINT ["/entrypoint.sh"]
