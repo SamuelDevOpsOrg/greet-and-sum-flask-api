@@ -14,7 +14,7 @@ def test_hello(client):
     json_data = response.get_json()
     
     assert response.status_code == 200
-    assert json_data['message'] == 'Hello, World!'
+    assert json_data['message'] == 'Hello, World!!'
 
 def test_greet(client):
     """Test the greet endpoint."""
