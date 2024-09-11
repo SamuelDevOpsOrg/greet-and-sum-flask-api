@@ -37,8 +37,8 @@ COPY . .
 # Run tests to verify the app works correctly
 RUN pytest --disable-warnings
 
-EXPOSE 5000 2222
+EXPOSE 80 2222
 
 # Run the application using a production-ready server
-# CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
-ENTRYPOINT ["entrypoint.sh"]
+CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:app"]
+# ENTRYPOINT ["entrypoint.sh"]
