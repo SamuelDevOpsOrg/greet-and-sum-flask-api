@@ -1,0 +1,14 @@
+{
+    "containerApps.deploymentConfigurations": [
+        {
+            "label": "hello-world-flask-app",
+            "type": "AcrDockerBuildRequest",
+            "dockerfilePath": "Dockerfile",
+            "srcPath": ".",
+            "envPath": "",
+            "resourceGroup": "hello-world-flask-2",
+            "containerApp": "hello-world-flask-app",
+            "containerRegistry": "helloworldflask2daf971"
+        }
+    ]
+}
