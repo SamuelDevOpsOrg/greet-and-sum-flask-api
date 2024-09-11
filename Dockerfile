@@ -24,8 +24,8 @@ RUN echo "root:Docker!" | chpasswd
 COPY sshd_config /etc/ssh/
 
 # Copy entrypoint.sh into the container and make it executable
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY entrypoint.sh entrypoint.sh
+RUN chmod +x entrypoint.sh
 
 # Install the dependencies
 RUN pip install --upgrade pip
@@ -41,4 +41,4 @@ EXPOSE 5000 2222
 
 # Run the application using a production-ready server
 # CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["entrypoint.sh"]
