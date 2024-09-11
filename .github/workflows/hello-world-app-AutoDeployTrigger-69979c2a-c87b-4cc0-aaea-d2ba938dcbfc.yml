@@ -1,0 +1,48 @@
+name: Trigger auto deployment for hello-world-app
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ dev ]
+    paths:
+    - '**'
+    - '.github/workflows/hello-world-app-AutoDeployTrigger-69979c2a-c87b-4cc0-aaea-d2ba938dcbfc.yml'
+
+  # Allow manual trigger 
+  workflow_dispatch:      
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions: 
+      id-token: write #This is required for requesting the OIDC JWT Token
+      contents: read #Required when GH token is used to authenticate with private repo
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.HELLOWORLDAPP_AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.HELLOWORLDAPP_AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.HELLOWORLDAPP_AZURE_SUBSCRIPTION_ID }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v2
+        with:
+          appSourcePath: ${{ github.workspace }}
+          _dockerfilePathKey_: _dockerfilePath_
+          registryUrl: bluewebapps.azurecr.io
+          registryUsername: ${{ secrets.HELLOWORLDAPP_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.HELLOWORLDAPP_REGISTRY_PASSWORD }}
+          containerAppName: hello-world-app
+          resourceGroup: hello-flask-env
+          imageToBuild: bluewebapps.azurecr.io/hello-world-app:${{ github.sha }}
+          _buildArgumentsKey_: |
+            _buildArgumentsValues_
+
+
