@@ -2,7 +2,7 @@
 
 ## Services/Tools: GitHub Actions, Flask, Python, Docker, ACR, Azure Container Apps
 
-Deployed a Python Flask REST Api using GitHub Actions.
+Configured a CI/CD pipeline to build and deploy a Python Flask REST Api to Azure Container Apps using GitHub Actions.
 
 Pipeline Stages:
 1. Build
