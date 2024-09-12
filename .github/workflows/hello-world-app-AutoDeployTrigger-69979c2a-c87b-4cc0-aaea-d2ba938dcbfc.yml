@@ -34,7 +34,7 @@ jobs:
 
       - name: Static Code Analysis with pylint
         # uses: cclauss/GitHub-Action-for-pylint@0.7.0
-        run: pylint **/*.py
+        run: pylint app.py test_app.py
 
       - name: Azure Login
         uses: azure/login@v1
