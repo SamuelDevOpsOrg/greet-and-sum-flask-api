@@ -29,32 +29,32 @@ jobs:
         with:
           python-version: '3.x'
 
-      # - name: Install Requirements
-      #   run: pip install -r requirements.txt
+      - name: Install Requirements
+        run: pip install -r requirements.txt
 
-      # - name: Static Code Analysis with pylint
-      #   run: pylint --fail-under=8 app.py test_app.py
+      - name: Static Code Analysis with pylint
+        run: pylint --fail-under=8 app.py test_app.py
 
-      # - name: Azure Login
-      #   uses: azure/login@v1
-      #   with:
-      #     client-id: ${{ secrets.HELLOSUMAPI_AZURE_CLIENT_ID }}
-      #     tenant-id: ${{ secrets.HELLOSUMAPI_AZURE_TENANT_ID }}
-      #     subscription-id: ${{ secrets.HELLOSUMAPI_AZURE_SUBSCRIPTION_ID }}
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.HELLOSUMAPI_AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.HELLOSUMAPI_AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.HELLOSUMAPI_AZURE_SUBSCRIPTION_ID }}
 
-      # - name: Build and push container image to registry
-      #   uses: azure/container-apps-deploy-action@v2
-      #   with:
-      #     appSourcePath: ${{ github.workspace }}
-      #     _dockerfilePathKey_: _dockerfilePath_
-      #     registryUrl: bluewebapps.azurecr.io
-      #     registryUsername: ${{ secrets.HELLOSUMAPI_REGISTRY_USERNAME }}
-      #     registryPassword: ${{ secrets.HELLOSUMAPI_REGISTRY_PASSWORD }}
-      #     containerAppName: hello-sum-api
-      #     resourceGroup: hello-sum-flask-env
-      #     imageToBuild: bluewebapps.azurecr.io/hello-sum-api:${{ github.sha }}
-      #     _buildArgumentsKey_: |
-      #       _buildArgumentsValues_
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v2
+        with:
+          appSourcePath: ${{ github.workspace }}
+          _dockerfilePathKey_: _dockerfilePath_
+          registryUrl: bluewebapps.azurecr.io
+          registryUsername: ${{ secrets.HELLOSUMAPI_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.HELLOSUMAPI_REGISTRY_PASSWORD }}
+          containerAppName: hello-sum-api
+          resourceGroup: hello-sum-flask-env
+          imageToBuild: bluewebapps.azurecr.io/hello-sum-api:${{ github.sha }}
+          _buildArgumentsKey_: |
+            _buildArgumentsValues_
 
   manual-approval:
     runs-on: ubuntu-latest
@@ -67,7 +67,7 @@ jobs:
           approvers: | 
             s-oluwade
           minimum-approvals: 1
-          secret: ${{ secrets.ACCESS_TOKEN_ORG }}
+          secret: ${{ secrets.BETA_TOKEN }}
 
   merge:
     runs-on: ubuntu-latest
