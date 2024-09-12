@@ -29,8 +29,8 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install pylint
-        run: pip install pylint pytest
+      - name: Install Requirements
+        run: pip install -r requirements.txt
 
       - name: Static Code Analysis with pylint
         # uses: cclauss/GitHub-Action-for-pylint@0.7.0
