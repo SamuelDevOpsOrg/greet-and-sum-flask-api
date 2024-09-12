@@ -50,9 +50,9 @@ jobs:
       #     registryUrl: bluewebapps.azurecr.io
       #     registryUsername: ${{ secrets.GREETSUMFLASKAPI_REGISTRY_USERNAME }}
       #     registryPassword: ${{ secrets.GREETSUMFLASKAPI_REGISTRY_PASSWORD }}
-      #     containerAppName: greet-sum-flask-api
+      #     containerAppName: greet-sum-api
       #     resourceGroup: greet-sum-flask-env
-      #     imageToBuild: bluewebapps.azurecr.io/greet-sum-flask-api:${{ github.sha }}
+      #     imageToBuild: bluewebapps.azurecr.io/greet-sum-api:${{ github.sha }}
       #     _buildArgumentsKey_: |
       #       _buildArgumentsValues_
               
