@@ -29,13 +29,16 @@ RUN chmod +x entrypoint.sh
 
 # Install the dependencies
 RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt pytest gunicorn
+RUN pip install --no-cache-dir -r requirements.txt pytest pylint gunicorn
 
 # Copy the rest of the application code into the container
 COPY . .
 
 # Run tests to verify the app works correctly
 RUN pytest --disable-warnings
+
+# Static Code Analysis
+RUN pylint **/*.py
 
 EXPOSE 80 2222
 
