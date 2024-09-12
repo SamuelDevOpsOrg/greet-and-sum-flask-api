@@ -67,7 +67,7 @@ jobs:
           approvers: | 
             s-oluwade
           minimum-approvals: 1
-          secret: ${{ github.TOKEN }}
+          secret: ${{ secrets.GITHUB_TOKEN }}
 
   merge:
     runs-on: ubuntu-latest
