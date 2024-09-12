@@ -5,7 +5,7 @@ on:
   # Automatically trigger it when detected changes in repo
   push:
     branches: 
-      [ dev ]
+      [ dev, master ]
     paths:
     - '**'
     - '.github/workflows/greet-sum-flask-api-AutoDeployTrigger-da00ea7b-e056-47f7-82ad-d8573cd128dc.yml'
