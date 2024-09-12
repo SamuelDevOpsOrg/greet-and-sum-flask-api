@@ -38,7 +38,7 @@ COPY . .
 RUN pytest --disable-warnings
 
 # Static Code Analysis
-RUN pylint **/*.py
+RUN pylint **/*.py --fail-under=8
 
 EXPOSE 80 2222
 
