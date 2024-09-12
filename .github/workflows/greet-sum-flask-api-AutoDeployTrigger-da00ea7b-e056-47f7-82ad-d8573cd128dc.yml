@@ -56,30 +56,30 @@ jobs:
           _buildArgumentsKey_: |
             _buildArgumentsValues_
 
-      manual-approval:
-        runs-on: ubuntu-latest
-        needs: build-and-deploy
-        if: github.ref == 'refs/heads/dev' # Ensure this job only runs for the dev branch
-        steps:
-          - name: Request Manual Approval
-            uses: peter-evans/manual-approval@v1
-            with:
-              reviewers: |
-                s-oluwade
+  manual-approval:
+    runs-on: ubuntu-latest
+    needs: build-and-deploy
+    if: github.ref == 'refs/heads/dev' # Ensure this job only runs for the dev branch
+    steps:
+      - name: Request Manual Approval
+        uses: peter-evans/manual-approval@v1
+        with:
+          reviewers: |
+            s-oluwade
 
-      merge:
-        runs-on: ubuntu-latest
-        needs: manual-approval
-        if: github.ref == 'refs/heads/dev' # Ensure this job only runs for the dev branch
-        steps:
-          - name: Checkout the code
-            uses: actions/checkout@v2
+  merge:
+    runs-on: ubuntu-latest
+    needs: manual-approval
+    if: github.ref == 'refs/heads/dev' # Ensure this job only runs for the dev branch
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
 
-          - name: Merge dev into master
-            uses: devops-infra/action-github-pull-request@v1
-            with:
-              title: 'Merge dev into master'
-              body: 'Automated merge of dev into master'
-              base: 'master'
-              head: 'dev'
-              github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Merge dev into master
+        uses: devops-infra/action-github-pull-request@v1
+        with:
+          title: 'Merge dev into master'
+          body: 'Automated merge of dev into master'
+          base: 'master'
+          head: 'dev'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
