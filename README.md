@@ -1,6 +1,6 @@
 ﻿# hello-world-flask
 
-# Services/Tools: GitHub Actions, Flask, Python, Docker, ACR, Azure Container Apps
+## Services/Tools: GitHub Actions, Flask, Python, Docker, ACR, Azure Container Apps
 
 Deployed a Python Flask REST Api using GitHub Actions.
 
