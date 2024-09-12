@@ -24,9 +24,17 @@ jobs:
       - name: Checkout to the branch
         uses: actions/checkout@v2
 
+      - name: Set up Python environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install pylint
+        run: pip install pylint
+
       - name: Static Code Analysis with pylint
-        uses: cclauss/GitHub-Action-for-pylint@0.7.0
-        # run: pylint **/*.py
+        # uses: cclauss/GitHub-Action-for-pylint@0.7.0
+        run: pylint **/*.py
 
       - name: Azure Login
         uses: azure/login@v1
