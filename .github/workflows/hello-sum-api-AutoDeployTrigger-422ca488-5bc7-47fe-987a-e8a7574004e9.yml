@@ -5,7 +5,7 @@ on:
   # Automatically trigger it when detected changes in repo
   push:
     branches: 
-      [ dev ]
+      [ dev, master ]
     paths:
     - '**'
     - '.github/workflows/hello-sum-api-AutoDeployTrigger-422ca488-5bc7-47fe-987a-e8a7574004e9.yml'
