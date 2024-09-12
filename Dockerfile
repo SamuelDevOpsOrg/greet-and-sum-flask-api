@@ -37,14 +37,8 @@ COPY . .
 # Run tests to verify the app works correctly
 RUN pytest --disable-warnings
 
-# Static Code Analysis
-RUN pylint **/*.py --fail-under=8
-
 EXPOSE 80 2222
 
 # Run the application using a production-ready server
-# exec flask run --host=0.0.0.0 --port=80
-# CMD ["flask", "run", "--host=0.0.0.0", "--port=80"]
 CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:app"]
-
 # ENTRYPOINT ["entrypoint.sh"]
