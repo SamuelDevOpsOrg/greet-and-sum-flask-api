@@ -61,13 +61,19 @@ jobs:
     needs: build-and-deploy
     if: github.ref == 'refs/heads/dev' # Ensure this job only runs for the dev branch
     steps:
+      - name: Generate token
+        id: generate_token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
       - name: Manual Workflow Approval
         uses: trstringer/manual-approval@v1.9.1
         with:
           approvers: | 
             s-oluwade
           minimum-approvals: 1
-          token: ${{ secrets.BETA_TOKEN }}
+          secret: ${{ steps.generate_token.outputs.token }}
 
   merge:
     runs-on: ubuntu-latest
